@@ -1,0 +1,42 @@
+name: Test and Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+        cache: true
+        
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Run tests with coverage
+      run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+
+    - name: Check coverage threshold
+      run: |
+        COVERAGE=$(go tool cover -func=coverage.txt | grep total | awk '{print substr($3, 1, length($3)-1)}')
+        echo "Total coverage: $COVERAGE%"
+        if (( $(echo "$COVERAGE < 90" | bc -l) )); then
+          echo "Code coverage is below 90%"
+          exit 1
+        fi
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.txt
+        fail_ci_if_error: true 
