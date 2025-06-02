@@ -21,7 +21,8 @@ func main() {
 	processWithContext(ctx)
 
 	// Create a child context
-	childCtx := appctx.New(ctx.Context()).WithCorrelationID(ctx.CorrelationID())
+	childCtx := appctx.New(ctx.Context())
+	childCtx.WithCorrelationID("child-correlation-id")
 	childCtx.SetMetadata("child", true)
 
 	// Demonstrate child context usage

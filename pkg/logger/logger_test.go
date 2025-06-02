@@ -84,8 +84,8 @@ func testAllLogLevels(t *testing.T, ctx *appctx.DefaultContext, tmpfile *os.File
 			assert.Equal(t, testMessage, logEntry["msg"])
 			assert.Equal(t, "test_value", logEntry["test_field"])
 			assert.Equal(t, "test-correlation-id", logEntry["correlation_id"])
-			assert.Equal(t, float64(123), logEntry["worker_id"])
 			assert.Equal(t, tt.level, logEntry["level"])
+			assert.Contains(t, logEntry, "runtime")
 		})
 	}
 }
@@ -182,6 +182,5 @@ func TestWithContext(t *testing.T) {
 
 	// Verify context fields are present
 	assert.Equal(t, "test-correlation-id-2", logEntry["correlation_id"])
-	assert.Equal(t, float64(456), logEntry["worker_id"])
 	assert.Contains(t, logEntry, "runtime")
 }

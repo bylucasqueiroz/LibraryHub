@@ -23,7 +23,7 @@ The example will demonstrate:
 1. Different log levels and their formatting
 2. Structured data in logs
 3. Error logging with stack traces
-4. Context fields (correlation ID, worker ID, runtime) automatically included
+4. Context fields (correlation ID, runtime) automatically included
 5. Parent-child relationship in logs
 
 ## Key Concepts
@@ -69,7 +69,6 @@ When using JSON encoding, logs will look like:
     "ts": "2024-03-14T15:04:05.000Z",
     "msg": "Processing user request",
     "correlation_id": "example-correlation-id",
-    "worker_id": 1,
     "runtime": "0.123s",
     "user_id": "123",
     "action": "login",

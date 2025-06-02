@@ -4,7 +4,7 @@ This example demonstrates the usage of the custom context package that extends t
 
 ## Features Demonstrated
 
-- Creating a new context with worker ID and correlation ID
+- Creating a new context with correlation ID
 - Setting and getting metadata
 - Creating child contexts
 - Context cancellation
@@ -19,7 +19,7 @@ go run main.go
 ## Expected Output
 
 The example will show:
-1. Basic context usage with worker ID and correlation ID
+1. Basic context usage with correlation ID
 2. Metadata storage and retrieval
 3. Child context inheritance
 4. Context cancellation in action
@@ -30,7 +30,6 @@ The example will show:
 ### Context Creation
 ```go
 ctx := appctx.New(context.Background())
-ctx.WithWorkerID(42)
 ctx.WithCorrelationID("example-correlation-id")
 ```
 
@@ -42,8 +41,8 @@ value, exists := ctx.GetMetadata("environment")
 
 ### Child Contexts
 ```go
-childCtx := appctx.New(ctx.ctx).WithCorrelationID(ctx.CorrelationID())
-childCtx.WithWorkerID(43)
+childCtx := appctx.New(ctx.Context())
+childCtx.WithCorrelationID("child-correlation-id")
 ```
 
 ### Context Cancellation
