@@ -21,7 +21,7 @@ func main() {
 		panic(err)
 	}
 
-	// Create a context with worker ID and correlation ID
+	// Create a context with correlation ID
 	ctx := appctx.New(context.Background())
 	ctx.WithCorrelationID("example-logger-correlation-id")
 
@@ -84,14 +84,12 @@ func demonstrateMultipleContexts() {
 	// Parent context
 	parentCtx := appctx.New(context.Background())
 	parentCtx.WithCorrelationID("parent-correlation-id")
-
 	logger.Info(parentCtx, "Parent context operation started")
 
 	// Child context
-	childCtx := appctx.New(parentCtx.Context()).WithCorrelationID(parentCtx.CorrelationID())
-
+	childCtx := appctx.New(parentCtx.Context())
+	childCtx.WithCorrelationID("child-correlation-id")
 	logger.Info(childCtx, "Child context operation started",
-		zap.String("parent_worker", "100"),
 		zap.String("operation", "child_task"),
 	)
 }
