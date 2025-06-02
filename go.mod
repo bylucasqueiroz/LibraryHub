@@ -1,4 +1,4 @@
-module github.com/bylucasqueiroz/go-mono
+module github.com/bylucasqueiroz/libraryhub
 
 go 1.23.3
 

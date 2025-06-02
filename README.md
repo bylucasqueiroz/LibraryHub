@@ -40,7 +40,7 @@ duration := ctx.Runtime()
 ## Installation
 
 ```bash
-go get github.com/yourusername/go-mono
+go get github.com/yourusername/libraryhub
 ```
 
 ## Development

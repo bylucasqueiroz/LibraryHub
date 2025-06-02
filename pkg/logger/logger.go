@@ -3,7 +3,7 @@ package logger
 import (
 	"os"
 
-	"github.com/bylucasqueiroz/go-mono/pkg/context"
+	"github.com/bylucasqueiroz/libraryhub/pkg/context"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 )
