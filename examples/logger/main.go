@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	appctx "github.com/bylucasqueiroz/go-mono/pkg/context"
-	"github.com/bylucasqueiroz/go-mono/pkg/logger"
+	appctx "github.com/bylucasqueiroz/libraryhub/pkg/context"
+	"github.com/bylucasqueiroz/libraryhub/pkg/logger"
 	"go.uber.org/zap"
 )
 
