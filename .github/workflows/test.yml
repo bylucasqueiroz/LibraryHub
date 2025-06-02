@@ -24,7 +24,11 @@ jobs:
       run: go mod download
 
     - name: Run tests with coverage
-      run: go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+      run: |
+        go test -race -coverprofile=coverage.tmp.txt -covermode=atomic ./...
+        # Remove examples folder from coverage report
+        cat coverage.tmp.txt | grep -v "/examples/" > coverage.txt
+        rm coverage.tmp.txt
 
     - name: Check coverage threshold
       run: |
